@@ -21,6 +21,7 @@ public:
     App& handleArguments(int argc, const char ** argv);
     App& printEnvironmentVariables();
     App& makeTempFile();
+    int getProcessId();
 };
 
 App& App::start()
@@ -79,6 +80,13 @@ App& App::makeTempFile()
     return *this;
 }
 
+int App::getProcessId()
+{
+    pid_t pid = getpid();
+    
+    return pid;
+}
+
 int main(int argc, const char * argv[]) {
         
     App app;
@@ -88,6 +96,8 @@ int main(int argc, const char * argv[]) {
         .handleArguments(argc, argv)
         .printEnvironmentVariables()
         .makeTempFile();
+    
+    std::cout << "PID : " << app.getProcessId() << std::endl;
 
     return 0;
 }
