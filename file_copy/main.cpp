@@ -9,6 +9,8 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <string.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 extern char **environ;
 
@@ -18,6 +20,7 @@ public:
     App& start();
     App& handleArguments(int argc, const char ** argv);
     App& printEnvironmentVariables();
+    App& makeTempFile();
 };
 
 App& App::start()
@@ -34,7 +37,8 @@ App& App::handleArguments(int argc, const char **argv)
     
     int len = argc;
     std::cout << len << std::endl;
-    for(int i = 0; i < len; i++) {
+    for(int i = 0; i < len; i++)
+    {
         std::cout << "argv" << i << ":";
         std::cout << argv[i] << std::endl;
     }
@@ -51,6 +55,30 @@ App& App::printEnvironmentVariables()
     return *this;
 }
 
+App& App::makeTempFile()
+{
+    int fd;
+    char temp[] = "/tmp/temp_test_XXXXXX";
+    fd = mkstemp(temp);
+    
+    if( fd == -1)
+    {
+        std::cout << "error mkstemp" << std::endl;
+        return *this;
+    }
+    
+    std::cout << "filename : " << temp << std::endl;
+    
+    unlink(temp);
+    
+    if(close(fd) == -1)
+    {
+        std::cout << "close() error" << std::endl;
+    }
+            
+    return *this;
+}
+
 int main(int argc, const char * argv[]) {
         
     App app;
@@ -58,7 +86,8 @@ int main(int argc, const char * argv[]) {
     app
         .start()
         .handleArguments(argc, argv)
-        .printEnvironmentVariables();
-        
+        .printEnvironmentVariables()
+        .makeTempFile();
+
     return 0;
 }
