@@ -22,6 +22,7 @@ public:
     App& printEnvironmentVariables();
     App& makeTempFile();
     int getProcessId();
+    int getParentProcessId();
 };
 
 App& App::start()
@@ -87,6 +88,13 @@ int App::getProcessId()
     return pid;
 }
 
+int App::getParentProcessId()
+{
+    pid_t pid = getppid();
+    
+    return pid;
+}
+
 int main(int argc, const char * argv[]) {
         
     App app;
@@ -98,6 +106,7 @@ int main(int argc, const char * argv[]) {
         .makeTempFile();
     
     std::cout << "PID : " << app.getProcessId() << std::endl;
+    std::cout << "PPID : " << app.getParentProcessId() << std::endl;
 
     return 0;
 }
