@@ -11,8 +11,10 @@
 #include <string.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <pwd.h>
 
 extern char **environ;
+typedef struct passwd _PWD;
 
 class App
 {
@@ -23,6 +25,7 @@ public:
     App& makeTempFile();
     int getProcessId();
     int getParentProcessId();
+    App& printPasswordName();
 };
 
 App& App::start()
@@ -95,6 +98,18 @@ int App::getParentProcessId()
     return pid;
 }
 
+App& App::printPasswordName()
+{
+    
+    struct passwd *pwd = getpwnam("u");
+    
+    std::cout << "PW_NAME : " << pwd->pw_name << std::endl;
+    std::cout << "PW_PASSWD : " << pwd->pw_passwd << std::endl;
+    std::cout << "PW_DIR" << pwd->pw_dir << std::endl;
+
+    return *this;
+}
+
 int main(int argc, const char * argv[]) {
         
     App app;
@@ -103,7 +118,8 @@ int main(int argc, const char * argv[]) {
         .start()
         .handleArguments(argc, argv)
         .printEnvironmentVariables()
-        .makeTempFile();
+        .makeTempFile()
+        .printPasswordName();
     
     std::cout << "PID : " << app.getProcessId() << std::endl;
     std::cout << "PPID : " << app.getParentProcessId() << std::endl;
