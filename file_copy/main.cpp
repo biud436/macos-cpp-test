@@ -102,6 +102,9 @@ App& App::printPasswordName()
 {
     const char *username = getenv("USER");
     struct passwd *pwd = getpwnam(username);
+    if(pwd == NULL) {
+        return *this;
+    }
     
     std::cout << "PW_NAME : " << pwd->pw_name << std::endl;
     std::cout << "PW_PASSWD : " << pwd->pw_passwd << std::endl;
