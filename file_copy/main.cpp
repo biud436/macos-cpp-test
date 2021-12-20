@@ -100,8 +100,8 @@ int App::getParentProcessId()
 
 App& App::printPasswordName()
 {
-    
-    struct passwd *pwd = getpwnam("u");
+    const char *username = getenv("USER");
+    struct passwd *pwd = getpwnam(username);
     
     std::cout << "PW_NAME : " << pwd->pw_name << std::endl;
     std::cout << "PW_PASSWD : " << pwd->pw_passwd << std::endl;
