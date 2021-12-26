@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <pwd.h>
+#include <limits.h>
 
 extern char **environ;
 typedef struct passwd _PWD;
@@ -126,6 +127,9 @@ int main(int argc, const char * argv[]) {
     
     std::cout << "PID : " << app.getProcessId() << std::endl;
     std::cout << "PPID : " << app.getParentProcessId() << std::endl;
-
+    std::cout << "FILE 이름 길이 : " << sysconf(_PC_NAME_MAX) << std::endl;
+    std::cout << "FILE 경로 길이 : " << sysconf(_PC_PATH_MAX) << std::endl;
+    std::cout << "동시에 열 수 있는 파일 디스크립터의 갯수 : " << sysconf(_SC_OPEN_MAX) << std::endl;
+    
     return 0;
 }
