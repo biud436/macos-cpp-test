@@ -19,14 +19,14 @@ To compile this program using `g++` in your system, try to do as below command o
 ```sh
 git clone https://github.com/biud436/unix-api.git
 cd ./unix_api
-cd ./file_copy
-make
-./app
+chmod +x ./build.sh
+./build.sh
 ```
 
 if you need to clean unused files after compiling, you can do as following steps.
 
 ```sh
+cd ./file_copy
 make clean
 ```
 
