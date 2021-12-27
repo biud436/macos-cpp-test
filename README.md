@@ -30,3 +30,8 @@ if you need to clean unused files after compiling, you can do as following steps
 make clean
 ```
 
+## Mac
+To compile this program, you must use the IDE called `XCode` and you can use specific unix API only.
+these certain API didn't support on the Mac.
+
+
