@@ -10,3 +10,23 @@
 하지만 단순 API 학습을 누군가 보기를 바라며 깃허브 프로젝트로 공개적으로 올리는 것은 나의 취향이 아니다. 이 프로젝트는 언젠가 비공개로 전환될 것이다.
 
 언젠가 유닉스 기반 API로 무언가 거대한 프로젝트를 만들게 된다면, 공개할 수 있으리라 생각한다.
+
+# Usage
+
+## Linux
+To compile this program using `g++` in your system, try to do as below command on your linux terminal.
+
+```sh
+git clone https://github.com/biud436/unix-api.git
+cd ./unix_api
+cd ./file_copy
+make
+./app
+```
+
+if you need to clean unused files after compiling, you can do as following steps.
+
+```sh
+make clean
+```
+
